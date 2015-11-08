@@ -1,0 +1,13 @@
+<h1>All Questions</h1>
+
+  <% @questions.each do |ques|  %>
+  <div class="well">
+  <%= link_to ques.title, question_path(ques) %>
+  </div>
+  <%end  %>
+
+<ul class="pagination">
+  <%# (1..Question.num_of_pages).each do |page_num| %>
+  <li> <%#= link_to page_num, questions_path(page_num: page_num) %> </li>
+  <%# end %>
+</ul>

@@ -1,0 +1,8 @@
+<h1>Create New Question</h1>
+
+<!-- Long form -->
+<%#= render("/questions/form") %>
+<!-- This will look for a partial named _form.html.erb within the same folder as the file were in (new.html.erb)
+and render it in here. Prials can access instance varibles but not local variables-->
+<!-- short form -->
+<%= render("form") %>

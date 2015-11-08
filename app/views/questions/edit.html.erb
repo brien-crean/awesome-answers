@@ -1,0 +1,21 @@
+<h1>Edit Question</h1>
+
+<!-- Commented out form as render uses the partial _form.html.erb -->
+<%#= @q.errors.full_messages.join(', ') %>
+<!-- Rails will auto fill the below fields by using the @q object -->
+<!-- also if the object @q is persisted (already exists) in the DB
+it will know to add PATCH to the form => check the form element-->
+<%#= form_for @q do |f| %>
+<!-- where f is a form object -->
+  <!-- <div> -->
+    <%#= f.label :title %>
+    <%#= f.text_field :title %>
+  <!-- </div> -->
+  <!-- <div> -->
+    <%#= f.label :body %>
+    <%#= f.text_area :body %>
+  <!-- </div> -->
+    <%#= f.submit %>
+<%# end  %>
+
+<%= render("form") %>

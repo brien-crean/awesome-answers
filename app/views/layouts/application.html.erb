@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AwesomeAnswers</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <style>
+      
+  </style>
+
+</head>
+<body>
+  <div class="container">
+
+    <%= render "/layouts/nav" %>
+
+    <!-- OLD CODE -->
+      <!-- paths -->
+    <!-- <a href="<%= root_path %>"><i class='glyphicon glyphicon-home'></i> Home</a> -->
+
+    <!-- URL helper - preferable to use this method for links instead of the anchor tage with the URL path-->
+    <!-- link_to is called a view helper, link_to is built into Rails and generates an anchor tag -->
+    <%# link_to("Home", index_path) %>
+
+    <%#= link_to("<i class='glyphicon glyphicon-plus'></i> New Question".html_safe, new_question_path) %>
+      <!-- local to the webserver -->
+    <%# index_path %>
+    <!-- absolute path to location -->
+    <%# index_url %>
+    <!-- END OLD CODE -->
+
+      <!-- notify using sessions can also use flash[:alert] -->
+        <% if flash[:notice] %>
+          <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <%=flash[:notice] %>
+          </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-danger"><%=flash[:alert] %></div>
+      <% end  %>
+
+    <%= yield %>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!-- Partial -->
+
+<!-- when in doubt for a form action path use /rails/info page for path helper -->
+<!-- authenticity token is automatically created by Rails -->
+<!-- form helper & URL_helper -->
+<%# form_tag questions_path do %>
+  <%#= submit_tag "Create Questions" %>
+  <%# end %>
+
+<%= @q.errors.full_messages.join(', ') %>
+
+<!-- form_for  helper method in rails expect ActiveRecord obj. If obj is not persisted (i.e. does not have an ID in the DB yet),
+Rails will male the forms use POST method and he action will be to create controller actions e.g. questions_path
+
+If the object you pass to the form_for is persisted then Rails will make the form use Patch method, (by including a hidden field with name _method
+it makes the action url go to the update controller action e.g. question_path(@q) )-->
+
+<!-- form_for looks at obj type given, Question, and automatically guesses the url assuming-->
+<!-- all rails conventions are followed, i.e. questions_controller then questions_path -->
+<%# form_for Question.new do |f| %>
+<%= form_for @q do |f| %>
+<!-- where f is a form object -->
+  <div class="form-group">
+    <%= f.label(:title) %>
+    <%# f.text_field(:title, {value: params[:question][:title]} %>
+    <%= f.text_field(:title, {class: "form-control", placeholder: "title"}) %>
+    <p class="help-block">Enter a title describing your question</p>
+  </div>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, {class: "form-control"} %>
+  </div>
+    <%= f.submit(class: "btn btn-primary")%>
+<% end  %>
+
+<!-- For Edit -->
+<!-- Rails will auto fill the below fields by using the @q object -->
+<!-- also if the object @q is persisted (already exists) in the DB
+it will know to add PATCH to the form => check the form element-->
+
+
+<!-- Old form style -->
+<!-- form below will submit as it has auth token -->
+<!-- <form class="" action=" <%= questions_path %>" method="post">
+
+  <input type="hidden" name="authenticity_token" value="<%#form_athenticity_token %>">
+  <input type="submit" name="name" value="Create Question">
+</form> -->
+
+<!-- form below will not submit as it has no auth token -->
+<!-- <form class="" action=" <%# questions_path %>" method="post">
+  <input type="submit" name="name" value="Create Question">
+</form> -->

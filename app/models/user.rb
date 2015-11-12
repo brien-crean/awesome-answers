@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
   # so that if a user closes their account the accounts are not deleted
   # instead the user_id in the question table is nullified
 
+  has_many :likes, dependent: :destroy
+  # has_many :questions, through: :likes => cannot do this because there is already a has_many :questions above that will conflict with this line
+  # instead do this below, its more descriptive, at the end specify that the other end of the relationship is question via source 
+  has_many :liked_questions, through: :likes, source: :question
+
   validates :email, presence: true, uniqueness: true
 
 

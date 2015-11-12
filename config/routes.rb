@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     #
     resources :answers
 
+    resources :likes, only: [:create, :destroy]
+
   end
 
     # to nest comments within answers

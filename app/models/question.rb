@@ -1,6 +1,12 @@
 class Question < ActiveRecord::Base
 
   belongs_to :user
+  has_many :likes, dependent: :destroy
+  # can do this for many to many
+  # has_many :users, through: :likes
+  # however this is more descriptive
+  # source: :user matches belongs_to: user in like.rb
+  has_many :liking_users, through: :likes, source: :user
 
   # pagination
   QUESTIONS_PER_PAGE = 10.0
@@ -34,6 +40,16 @@ class Question < ActiveRecord::Base
   # called after object initialization e.g. q = Question.new
   after_initialize :set_default_values
   before_validation :capitalize_title
+
+  def liked_by?(user)
+    # Question.likes
+    likes.find_by_user_id(user.id).present?
+    # like_for(user).present? = > refactor
+  end
+
+  def like_for(user)
+    likes.find_by_user_id(user.id)
+  end
 
   # shorthand instead of defining a class method => use scope method with a lambda
   # scope(:recent_ten, lambda {order("created_at DESC").limit(10)})

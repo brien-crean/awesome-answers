@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
     @answer.user = current_user
     # shortcut of above
     #@answer = current_user.answers.new(answer_params)
-    byebug
+    # byebug
     if @answer.save
       # e.g. To look at what we receive in params
       # render text: params

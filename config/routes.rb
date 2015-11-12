@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     resources :answers
 
   end
+
+    # to nest comments within answers
+    resources :answers, only: [] do
+      resources :comments
+    end
+
   # routes file is not aware of a controllers existence
   get "/index" => "welcome#index"
 

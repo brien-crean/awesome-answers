@@ -17,12 +17,19 @@ class QuestionsController < ApplicationController
   def index
     # raise(params.inspect)
     # number_of_questions =
-    page_num = params[:page_num].to_i || 1
-    #@questions = Question.get_page(page_num)
+    # grab page_num from params, if nil set it to 1
+
+    if params[:page_num]
+      page_num = params[:page_num].to_i
+    else
+      page_num = 1
+    end
+    # byebug
+    @questions = Question.get_page(page_num)
     # pagination not working
-    @questions = Question.all.order("updated_at DESC")
-    # render text: params
-    # 100.times do puts "#{params[:page_num]}" end
+    # @questions = Question.all.order("updated_at DESC")
+    # render text: page_num
+
   end
 
   def new

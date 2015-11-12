@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
   belongs_to :user
 
   # pagination
-  QUESTIONS_PER_PAGE = 10
+  QUESTIONS_PER_PAGE = 10.0
 
   # when using has_many :answers we expect that we have a model named Answer
   # we use the dependent option to maintain referential integrity, we have 2 options:
@@ -61,11 +61,12 @@ class Question < ActiveRecord::Base
     offset_page = page_num - 1
     offset_value = offset_page * QUESTIONS_PER_PAGE
     offset(offset_value).limit(QUESTIONS_PER_PAGE)
+    # byebug
     # all.limit(params[:page_num])
   end
 
   def self.num_of_pages
-    num_of_pages = Question.count / QUESTIONS_PER_PAGE
+    num_of_pages = (Question.count / QUESTIONS_PER_PAGE).round
   end
 
   private

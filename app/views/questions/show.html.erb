@@ -8,6 +8,13 @@
   <%= @q.user.full_name %>
 </p>
 <% end  %>
+
+<% if @q.tags.any? %>
+Tagged with:
+  <% @q.tags.each do |tag| %>
+  <div class="label label-primary"><%= tag.name %></div>
+  <% end %>
+<% end  %>
 <!-- passes edit to 'can :manage, Question do |q|' -->
 <% if can? :edit, @q %>
 <%= link_to "Edit", edit_question_path(@q), class: "btn btn-info btn-sm" %>
@@ -17,14 +24,25 @@
                                           class: "btn btn-danger btn-sm",
                                           data: {confirm: "Are you sure?"}})%>
 <% end  %>
+<!-- likes -->
 <% if user_signed_in? && @q.liked_by?(current_user) %>
                                             <!-- because not helper method, need to add @q.like_for to reach the method in Question.rb -->
-  <%= link_to fa_icon("thumbs-o-up"), question_like_path(@q, @q.like_for(current_user)), class: "icon-big", method: :delete %>
+  <%= link_to fa_icon("thumbs-up"), question_like_path(@q, @q.like_for(current_user)), class: "icon-big", method: :delete %>
 <% else %>
-  <%= link_to fa_icon("thumbs-up"), question_likes_path(@q), class: "icon-big", method: :post %>
+  <%= link_to fa_icon("thumbs-o-up"), question_likes_path(@q), class: "icon-big", method: :post %>
 <% end %>
-
 Liked: <%= pluralize(@q.likes.count, "time") %>
+
+<!-- favourites -->
+<% if user_signed_in? && @q.favourited_by?(current_user) %>
+                                            <!-- because not helper method, need to add @q.like_for to reach the method in Question.rb -->
+  <%= link_to fa_icon("star"), [@q, @q.favourite_for(current_user)], class: "icon-big", method: :delete %>
+                          <!-- replace 'question_favourite_path(@q, @q.favourite_for(current_user))' with shortcut [@q, @q.favourite_for(current_user)]-->
+<% else %>
+  <%= link_to fa_icon("star-o"), question_favourites_path(@q), class: "icon-big", method: :post %>
+<% end %>
+Faved: <%= pluralize(@q.favourites.count, "time") %>
+
   <h2>Submit an Answer</h2>
 
 <!-- attach errors if any -->

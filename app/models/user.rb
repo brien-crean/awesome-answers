@@ -15,9 +15,12 @@ class User < ActiveRecord::Base
 
   has_many :likes, dependent: :destroy
   # has_many :questions, through: :likes => cannot do this because there is already a has_many :questions above that will conflict with this line
-  # instead do this below, its more descriptive, at the end specify that the other end of the relationship is question via source 
+  # instead do this below, its more descriptive, at the end specify that the other end of the relationship is question via source
   has_many :liked_questions, through: :likes, source: :question
 
+  has_many :favourites, dependent: :destroy
+  has_many :favourited_questions, through: :favourites, source: :question
+  
   validates :email, presence: true, uniqueness: true
 
 

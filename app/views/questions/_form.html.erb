@@ -31,6 +31,10 @@ it makes the action url go to the update controller action e.g. question_path(@q
     <%= f.text_area :body, {class: "form-control"} %>
   </div>
     <%= f.submit(class: "btn btn-primary")%>
+
+  <div class="form-group">
+    <%= f.collection_check_boxes :tag_ids, Tag.order(:name), :id, :name %>
+  </div>
 <% end  %>
 
 <!-- For Edit -->

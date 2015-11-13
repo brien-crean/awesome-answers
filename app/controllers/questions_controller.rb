@@ -44,6 +44,7 @@ class QuestionsController < ApplicationController
     # using require (grabs 'question key' from params => can be seen in the logs) and permit (only allows title and body parameters)
     # so if a hacker tries to pass a created_at, user_id by editing html in dev tools etc it will be denied by Rails
     question_params
+    # byebug
     # code below refactored to a private questions param method
     # = params.require(:question).permit([:title, :body])
     # create as instance var so it can be shared with form
@@ -80,6 +81,7 @@ class QuestionsController < ApplicationController
       # instantiate an empty Answer object as we need a form on the show page to
       # create an answer for our question
       @answer = Answer.new
+      # render text: params
   end
 
   def edit
@@ -116,7 +118,8 @@ class QuestionsController < ApplicationController
 
   def question_params
         #refactored code
-        params.require(:question).permit([:title, :body])
+        params.require(:question).permit([:title, :body, {tag_ids: []}])
+        # {tag_ids: []} allows an array of values to be permitted when written in this way
   end
 
   def find_question

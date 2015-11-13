@@ -8,6 +8,12 @@ class Question < ActiveRecord::Base
   # source: :user matches belongs_to: user in like.rb
   has_many :liking_users, through: :likes, source: :user
 
+  has_many :favourites, dependent: :destroy
+  has_many :favouriting_users, through: :favourites, source: :user
+                              # favourites references the previous has many statement => has to match
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
+
   # pagination
   QUESTIONS_PER_PAGE = 10.0
 
@@ -49,6 +55,16 @@ class Question < ActiveRecord::Base
 
   def like_for(user)
     likes.find_by_user_id(user.id)
+  end
+
+  def favourited_by?(user)
+    # Question.likes
+    favourites.find_by_user_id(user.id).present?
+    # like_for(user).present? = > refactor
+  end
+
+  def favourite_for(user)
+    favourites.find_by_user_id(user.id)
   end
 
   # shorthand instead of defining a class method => use scope method with a lambda

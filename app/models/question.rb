@@ -106,7 +106,7 @@ validates_format_of :title, without: /Example2/
 
   private
 
-  #customterm method
+  #custom term method
   def no_monkey
     if title.present? && title.downcase.include?("monkey")
       errors.add(:title, "No monkeys please!")

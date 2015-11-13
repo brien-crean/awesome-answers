@@ -5,9 +5,7 @@ class QuestionsController < ApplicationController
   # authenticate_user is called before every action
   before_action :authenticate_user, except: [:index, :show]
 
-  # before_action :authorize, only: [:edit, :update, :destroy]
-
-  before_action :notify_admin, only: [:destroy]
+  before_action :authorize, only: [:edit, :update, :destroy]
 
   #before action will register a method, e.g. (find question below) that will be executed before all actions
   # unless you specify options such as except or only
@@ -129,13 +127,9 @@ class QuestionsController < ApplicationController
   end
 
   def authorize
-    redirect_to root_path, alert: "Access denied!" unless can?(:manage, @q)
-  end
-
-  def notify_admin
     @q = Question.find params[:id]
-    50.times do puts "About to delete Question! Title: #{@q.title}"
-    end
+    redirect_to root_path, alert: "Access denied!" unless can?(:manage, @q)
+
   end
 
 end

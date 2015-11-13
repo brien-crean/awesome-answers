@@ -1,28 +1,12 @@
-== README
+#README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+  - ruby version 2.2.1p85
+  - rails version 4.2.4
+  - Postgres Database with ActiveRecord ORM
+  - Bootstrap for styling
 
-Things you may want to cover:
+stack overflow clone that will allow users to ask questions on a range of topics.
 
-* Ruby version
+Users can answer questions, comment on answers, like and favourite questions.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Authentication has been implemented from scratch and cancancan has been implented for authorization.

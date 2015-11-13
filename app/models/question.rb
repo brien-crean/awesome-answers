@@ -30,6 +30,9 @@ class Question < ActiveRecord::Base
                      uniqueness: {message: "was used already"},
                      length:      {minimum: 3}}) # custom error message q.errors will list this
 
+# prevents somone from entering the text Example2
+validates_format_of :title, without: /Example2/
+
   validates :body, presence: true,
                    uniqueness: {scope: :title}
                    # using scope: rails will make sure that the body is unique

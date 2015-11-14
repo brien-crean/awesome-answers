@@ -14,6 +14,9 @@ class Question < ActiveRecord::Base
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
+  has_many :votes, dependent: :destroy
+  has_many :voting_users, through: :votes, source: :user
+
   # pagination
   QUESTIONS_PER_PAGE = 10.0
 
@@ -102,6 +105,20 @@ validates_format_of :title, without: /Example2/
 
   def self.num_of_pages
     num_of_pages = (Question.count / QUESTIONS_PER_PAGE).round
+  end
+
+  # check if voted on already by a user
+  def voted_on_by?(user)
+    vote_for(user).present?
+  end
+
+
+  def vote_for(user)
+    votes.find_by_user_id user.id
+  end
+
+  def vote_result
+    votes.select {|v| v.is_up?}.count - votes.select {|v| !v.is_up?}.count
   end
 
   private

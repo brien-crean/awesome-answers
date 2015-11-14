@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
 
 
   def index
+    QuestionsCleanupJob.perform_later
     # raise(params.inspect)
     # number_of_questions =
     # grab page_num from params, if nil set it to 1

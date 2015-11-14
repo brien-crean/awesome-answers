@@ -24,6 +24,9 @@ Tagged with:
                                           class: "btn btn-danger btn-sm",
                                           data: {confirm: "Are you sure?"}})%>
 <% end  %>
+
+<div class="">
+
 <!-- likes -->
 <% if user_signed_in? && @q.liked_by?(current_user) %>
                                             <!-- because not helper method, need to add @q.like_for to reach the method in Question.rb -->
@@ -43,6 +46,25 @@ Liked: <%= pluralize(@q.likes.count, "time") %>
 <% end %>
 Faved: <%= pluralize(@q.favourites.count, "time") %>
 
+<!-- Voting -->
+  <!-- if not signed in or the current user has not voted on this question -->
+  <% if !user_signed_in? || !@q.voted_on_by?(current_user) %>
+                                          <!-- passing 'is_up' via params, and using vote as a key to access  -->
+    <%= link_to fa_icon("arrow-up"), question_votes_path(@q, {vote: {is_up: true}}), class: "icon-big", method: :post %>
+    <%= link_to fa_icon("arrow-down"), question_votes_path(@q, {vote: {is_up: false}}), class: "icon-big", method: :post %>
+  <% elsif @q.vote_for(current_user).is_up? %>
+                                              <!-- note: checking if there is a vote for a specific user -->
+    <%= link_to fa_icon("arrow-up"), question_vote_path(@q, @q.vote_for(current_user)), class: "icon-big text-danger", method: :delete %>
+              <!-- in this scenario we need to check if the current_user has a vote for this question and also need to set is_up to false -->
+    <%= link_to fa_icon("arrow-down"), question_vote_path(@q, @q.vote_for(current_user), {vote: {is_up: false}}), class: "icon-big", method: :patch %>
+  <% elsif !@q.vote_for(current_user).is_up? %>
+    <%= link_to fa_icon("arrow-up"), question_vote_path(@q, @q.vote_for(current_user), {vote: {is_up: true}}), class: "icon-big", method: :patch %>
+    <%= link_to fa_icon("arrow-down"), question_vote_path(@q, @q.vote_for(current_user)), class: "icon-big text-danger", method: :delete %>
+<% end  %>
+
+  <%= @q.vote_result %>
+</div>
+<!--  -->
   <h2>Submit an Answer</h2>
 
 <!-- attach errors if any -->

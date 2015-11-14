@@ -20,9 +20,11 @@ class User < ActiveRecord::Base
 
   has_many :favourites, dependent: :destroy
   has_many :favourited_questions, through: :favourites, source: :question
-  
+
   validates :email, presence: true, uniqueness: true
 
+  has_many :votes, dependent: :nullify
+  has_many :voted_questions, through: :votes, source: :question
 
   def full_name
     # create a full_name and strip any trailing whitespace, especially in case there is one missing first or last name

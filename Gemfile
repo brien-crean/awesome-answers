@@ -14,6 +14,12 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'delayed_job_active_record'
+
+gem 'delayed_job_web'
+
+gem 'letter_opener'
+
 gem 'faker'
 
 gem 'cowsay'

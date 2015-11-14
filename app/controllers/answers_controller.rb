@@ -24,6 +24,8 @@ class AnswersController < ApplicationController
     #@answer = current_user.answers.new(answer_params)
     # byebug
     if @answer.save
+      # notify question owner that the question has a new answer
+      AnswersMailer.notify_question_owner(Answer.last).deliver_now
       # e.g. To look at what we receive in params
       # render text: params
       # redirect to question

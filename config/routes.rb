@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
   resources :users, only: [:new, :create]
 
   resources :sessions, only: [:new, :create] do
@@ -28,6 +30,8 @@ Rails.application.routes.draw do
 
     resources :likes, only: [:create, :destroy]
     resources :favourites, only: [:create, :destroy]
+
+    resources :votes, only: [:create, :destroy, :update]
 
   end
 

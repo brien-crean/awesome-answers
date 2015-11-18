@@ -29,7 +29,7 @@ Tagged with:
 
 <!-- likes -->
 <% if user_signed_in? && @q.liked_by?(current_user) %>
-                                            <!-- because not helper method, need to add @q.like_for to reach the method in Question.rb -->
+                                            <!-- note because like_for is not a helper method, need to add @q.like_for to reach the method in Question.rb -->
   <%= link_to fa_icon("thumbs-up"), question_like_path(@q, @q.like_for(current_user)), class: "icon-big", method: :delete %>
 <% else %>
   <%= link_to fa_icon("thumbs-o-up"), question_likes_path(@q), class: "icon-big", method: :post %>

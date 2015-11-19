@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
     # params[:question_id] is coming from the URL which looks like
     # questions/10/answers
     # find question in DB using question_id passed in params
-    @q = Question.find params[:question_id]
+    @q = Question.friendly.find params[:question_id]
 
     # create answer in Answer table using params data
     @answer = Answer.new(answer_params)

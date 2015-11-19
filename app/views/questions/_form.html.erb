@@ -18,7 +18,7 @@ it makes the action url go to the update controller action e.g. question_path(@q
 <!-- form_for looks at obj type given, Question, and automatically guesses the url assuming-->
 <!-- all rails conventions are followed, i.e. questions_controller then questions_path -->
 <%# form_for Question.new do |f| %>
-<%= form_for @q do |f| %>
+<%= simple_form_for @q do |f| %>
 <!-- where f is a form object -->
   <div class="form-group">
     <%= f.label(:title) %>

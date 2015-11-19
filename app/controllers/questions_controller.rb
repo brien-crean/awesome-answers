@@ -78,7 +78,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-      # @q = Question.find(params[:id]) => refactored
+      # @q = Question.friendly.find(params[:id]) => refactored
       # instantiate an empty Answer object as we need a form on the show page to
       # create an answer for our question
       @answer = Answer.new
@@ -90,11 +90,12 @@ class QuestionsController < ApplicationController
       # if current_user != @q.user
       #   redirect_to root_path, alert: "Access Denied."
       # end
-      # @q = Question.find(params[:id])
+      # @q = Question.friendly.find(params[:id])
   end
 
   def update
-      # @q = Question.find(params[:id])
+      # @q.slug = nil
+      # @q = Question.friendly.find(params[:id])
 
       # code below refactored to a private questions param method
       # question_params = params.require(:question).permit([:title, :body])
@@ -108,7 +109,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-      # @q = Question.find(params[:id])
+      # @q = Question.friendly.find(params[:id])
       @q.destroy
       # nottify using session that message deleted
       flash[:notice] = "Question deleted successfully"
@@ -124,11 +125,12 @@ class QuestionsController < ApplicationController
   end
 
   def find_question
-      @q = Question.find(params[:id])
+      # @q = Question.friendly.find(params[:id]) => pre friendly id
+      @q = Question.friendly.find(params[:id])
   end
 
   def authorize
-    @q = Question.find params[:id]
+    @q = Question.friendly.find params[:id]
     redirect_to root_path, alert: "Access denied!" unless can?(:manage, @q)
 
   end

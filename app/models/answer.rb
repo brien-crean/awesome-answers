@@ -6,7 +6,7 @@ class Answer < ActiveRecord::Base
   # q = a.question => returnds a question object whose id is a.question_id
   # to set a question for a given answer:
   #  a = Answer.new({body: "Abc"})
-  #  q = Question.find(100)
+  #  q = Question.friendly.find(100)
   # a.question = q
   # a.save
   belongs_to :question

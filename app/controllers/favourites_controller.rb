@@ -4,7 +4,7 @@ class FavouritesController < ApplicationController
   def create
     favourite           = Favourite.new
     # favourite           = current_user.favourites.new
-    question            = Question.find params[:question_id]
+    question            = Question.friendly.find params[:question_id]
     favourite.question  = question
     favourite.user      = current_user
     if favourite.save
@@ -15,7 +15,7 @@ class FavouritesController < ApplicationController
   end
 
   def destroy
-    question      = Question.find params[:question_id]
+    question      = Question.friendly.find params[:question_id]
 
     favourite     = current_user.favourites.find(params[:id]) # because the id for the Like is passed in params as :id
     favourite.destroy

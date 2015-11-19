@@ -1,4 +1,7 @@
 // $brand-primary: orange; => to override color options in bootstrap
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+//modify bootstrap examples
+// $brand-primary: red;
+// $border-radius-base: 0px;
 @import "bootstrap-sprockets";
 @import "bootstrap";

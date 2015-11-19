@@ -1,5 +1,8 @@
 class Question < ActiveRecord::Base
 
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :user
   has_many :likes, dependent: :destroy
   # can do this for many to many
@@ -138,6 +141,16 @@ validates_format_of :title, without: /Example2/
   def capitalize_title
     self.title.capitalize! if title
   end
+
+  # override to_param defaults, which is:
+  # def to_param
+  #   id
+  # end
+
+  # def self.to_param
+  #   "#{id}-#{title}".parameterize
+  # end
+
 
 
 end

@@ -2,7 +2,7 @@ class VotesController < ApplicationController
   before_action :authenticate_user
 
   def create
-    question = Question.find params[:question_id]
+    question = Question.friendly.find params[:question_id]
     # will instantiate avote object pre-associated with the current user
     # which means 'vote' will have a user_id calue equivaleny to the current user
     vote = current_user.votes.new(vote_params)
@@ -17,16 +17,16 @@ class VotesController < ApplicationController
 
 
   def destroy
-    question = Question.find params[:question_id]
+    question = Question.friendly.find params[:question_id]
     vote = current_user.votes.find params[:id]
-    question = Question.find params[:question_id]
+    question = Question.friendly.find params[:question_id]
     vote = current_user.votes.find params[:id]
     vote.destroy
     redirect_to question_path(question), alert: "Vote Removed!"
   end
 
   def update
-    question = Question.find params[:question_id]
+    question = Question.friendly.find params[:question_id]
     vote = current_user.votes.find params[:id]
 
     if vote.update vote_params
@@ -47,7 +47,7 @@ class VotesController < ApplicationController
   # we can refactor to a method that finds the question
   def question
     # this can save a little time as we are caching the question 
-    @question ||= Question.find params[:question_id]
+    @question ||= Question.friendly.find params[:question_id]
   end
 
 end

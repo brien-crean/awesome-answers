@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   # POST/questions/12/likes
   def create
     like          = Like.new
-    question      = Question.find params[:question_id]
+    question      = Question.friendly.find params[:question_id]
     like.question = question
     like.user     = current_user
     if like.save
@@ -16,7 +16,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    question      = Question.find params[:question_id]
+    question      = Question.friendly.find params[:question_id]
 
     # like = Like.find(params[:id]) # because the id for the Like is passed in params as :id
     # better option than above as now we are checking if the like belongs to the current user or not

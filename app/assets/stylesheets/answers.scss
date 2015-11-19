@@ -1,6 +1,38 @@
 // Place all the styles related to the answers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.delete-right {
-  float: right;
-}
+//
+// @import "app_variables";
+// @mixin border-radius($radius) {
+//   -webkit-border-radius: $radius;
+//      -moz-border-radius: $radius;
+//       -ms-border-radius: $radius;
+//           border-radius: $radius;
+// }
+//
+// .box { @include border-radius(10px); }
+//
+//
+// .delete-right {
+//   float: right;
+// }
+//
+// .edit-right {
+//   // sass built in mixin darken below
+//   color: darken($special-color, 20%);
+//   float: $default-float;
+//   @include border-radius(10px);
+// }
+//
+// div.container img {
+//   border: 2px solid;
+// }
+//
+// div.container {
+//   img {
+//     border: 2px solid;
+//   }
+//   .well {
+//     text-align: left;
+//   }
+// }

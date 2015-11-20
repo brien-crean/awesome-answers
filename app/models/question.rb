@@ -3,6 +3,8 @@ class Question < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  mount_uploader :image, ImageUploader
+
   belongs_to :user
   has_many :likes, dependent: :destroy
   # can do this for many to many

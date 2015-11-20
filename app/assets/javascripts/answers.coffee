@@ -12,16 +12,16 @@
 # console.log captitalize("brien")
 
 $ ->
-
   captitalize = (word) ->
-    word.charAt(0).toUppercase() + word.slice(1)
+    firstLetterCap = word.charAt(0).toUpperCase()
+    firstLetterCap + word.slice(1)
 
   $(".btn").on "click", ->
     $(@).toggleClass('btn btn-info').toggleClass("btn btn-danger")
 
   $(".text-input").on "keyup", ->
-    text_input = $('.text-input').val()
-    result = captitalize(text_input)
-    $(".text-output").text(result)
+    text_input = $(@).val().split(" ")
+    text_input =  text_input.map (word) -> captitalize(word)
+    $(".text-output").text(text_input.join(" "))
 
 # text.charAt(0).toUppercase() + text.slice(1)

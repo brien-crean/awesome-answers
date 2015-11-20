@@ -120,7 +120,7 @@ class QuestionsController < ApplicationController
 
   def question_params
         #refactored code
-        params.require(:question).permit([:title, :body, {tag_ids: []}])
+        params.require(:question).permit([:title, :body, {tag_ids: []}, :image])
         # {tag_ids: []} allows an array of values to be permitted when written in this way
   end
 

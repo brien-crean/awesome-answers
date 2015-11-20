@@ -30,7 +30,7 @@ it makes the action url go to the update controller action e.g. question_path(@q
     <%= f.label :body %>
     <%= f.text_area :body, {class: "form-control"} %>
   </div>
-
+    <%= f.input :image %>
   <div class="form-group"><!-- :tag_ids below is equivalent of @q.tag_ids    -->
     <%= f.collection_check_boxes :tag_ids, Tag.order(:name), :id, :name %>
                           <!-- Tags then ordered by name, value of checkbox will be tag ':id', and dispaly text will be Tag ':name' -->

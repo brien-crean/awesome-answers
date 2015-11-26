@@ -1,0 +1,14 @@
+// prepends the text at the top of the answers div
+// $("#answers").prepend("<%= @answer.body %>");
+// here we render the partial and also use the @answer from the controller rather than the answer that was passed to the partial
+$("#answers").prepend("<%= j render '/answers/answer', answer: @answer %>");
+// notice that the j method above escapes JavaScript which means it will put a \ before every "
+// it escapes the quotes
+
+// we need to reset @answer to become Answer.new because @answer is now persisted
+// which means that the form will Submit a PATCH request
+//
+<% @answer = Answer.new %>
+$(".new_answer").replaceWith("<%= j render 'form' %>");
+// empty the text field
+$("#answer_body").val("");

@@ -1,0 +1,11 @@
+<!-- shortcut of above, benefit of using the answers routes nested within questions
+note that @q must persist for this to work -->
+<%= simple_form_for [@q, @answer], remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit class: "btn btn-primary", data: {disable_with: "Saving..."} %>
+  </div>
+<% end %>
